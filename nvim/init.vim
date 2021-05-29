@@ -111,6 +111,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
 
+set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
+
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
