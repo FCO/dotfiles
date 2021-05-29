@@ -91,6 +91,18 @@ parser_config.perl = {
 }
 EOF
 
+lua <<EOF
+require'telescope'.setup {
+  extensions = {
+    media_files = {
+      -- filetypes whitelist
+      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+    }
+  },
+}
+EOF
+
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
 let g:completion_enable_snippet = 'Neosnippet'
@@ -109,7 +121,9 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_enable_perl_checker = 1
+let g:syntastic_enable_raku_checker = 1
 let g:syntastic_perl_checkers = ['perl', 'podchecker']
+let g:syntastic_raku_checkers = ['raku']
 
 set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
 
