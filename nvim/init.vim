@@ -8,18 +8,18 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'pangloss/vim-javascript'
 Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/completion-treesitter'
+" Plug 'nvim-treesitter/completion-treesitter'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
 Plug 'rafamadriz/friendly-snippets'
-"if has('nvim')
-"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plug 'Shougo/deoplete.nvim'
-"  Plug 'roxma/nvim-yarp'
-"  Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-""let g:deoplete#enable_at_startup = 1
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
@@ -46,6 +46,14 @@ Plug 'troydm/zoomwintab.vim'
 Plug 'scrooloose/syntastic'
 
 Plug 'morhetz/gruvbox'
+
+Plug 'codota/tabnine-vim'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+Plug 'tpope/vim-fugitive'
+
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -184,14 +192,29 @@ nmap ga      <Plug>(EasyAlign)
 set relativenumber
 set nu
 
-let g:leaderMenu = {'name':  "",
-             \'fd': [":tabe $MYVIMRC",       "tabe vimrc"],
-             \'ff': [":Telescope find_files",       "find files"],
-             \'fb': [":Telescope bufers",       "buffers"],
-             \'fh': [":Telescope help_tags",       "help"],
-             \'fgc': [":Telescope git_commits",       "commits"],
-             \'fgb': [":Telescope git_branches",       "branches"],
-             \}
+let file_menu = {'name': "File",
+     \'d':  [":tabe $MYVIMRC",          "tabe vimrc"],
+     \'f':  [":Telescope find_files",   "find files"],
+     \'b':  [":Telescope bufers",          "buffers"],
+     \'h':  [":Telescope help_tags",          "help"],
+\}
+
+let git_menu = {'name': "Git",
+     \'c': [":Telescope git_commits",   "commits"],
+     \'b': [":Telescope git_branches", "branches"],
+\}
+
+let run_menu = {'name': "Run",
+     \'p': [":!perl %",        "Run perl"],
+     \'r': [":!raku %",        "Run raku"],
+     \'js': [":!node %", "Run javascript"],
+\}
+
+let g:leaderMenu = {'name':  "Main Menu",
+     \'f':  [file_menu, "File Menu"],
+     \'g': [git_menu,    "Git Menu"],
+     \'r': [run_menu,    "Run Menu"],
+ \}
 
 " Define leader key to space and call vim-leader-mapper
 nnoremap <Space> <Nop>
@@ -200,3 +223,11 @@ nnoremap <silent> <leader> :LeaderMapper "<Space>"<CR>
 vnoremap <silent> <leader> :LeaderMapper "<Space>"<CR>
 
 colorscheme gruvbox
+
+" Use persistent history.
+if !isdirectory("/Users/fernando/.config/vim-undo-dir")
+    call mkdir("/Users/fernando/.config/vim-undo-dir", "", 0700)
+endif
+set undodir=/Users/fernando/.config/vim-undo-dir
+set undofile
+
