@@ -55,7 +55,7 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-gitgutter'
 
-" Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
@@ -211,7 +211,7 @@ let git_menu = {'name': "Git",
      \'st': [":Git",                                    "status"],
      \'qf': [":command! Gqf GitGutterQuickFix | copen", "quickfix changes"],
      \']':  [":GitGutterNextHunk",                      "next hunk"],
-     \'[':  [":GitGutterPreviousHunk",                  "previous hunk"],
+     \'[':  [":GitGutterPrevHunk",                      "previous hunk"],
 \}
 
 let run_menu = {'name': "Run",
