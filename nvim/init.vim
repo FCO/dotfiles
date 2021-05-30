@@ -57,6 +57,12 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'terryma/vim-multiple-cursors'
 
+Plug 'vim-test/vim-test'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
 call plug#end()
 
 lua require('telescope').load_extension('media_files')
@@ -241,5 +247,3 @@ if !isdirectory("/Users/fernando/.config/vim-undo-dir")
 endif
 set undodir=/Users/fernando/.config/vim-undo-dir
 set undofile
-
-GitGutter
