@@ -206,6 +206,7 @@ let git_menu = {'name': "Git",
      \'s': [":GitGutterStageHunk",       "stage hunk"],
      \'c': [":Git commit",                   "commit"],
      \'p': [":Git push",                       "push"],
+     \'st': [":Git",                         "status"],
 \}
 
 let run_menu = {'name': "Run",
