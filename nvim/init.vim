@@ -200,8 +200,12 @@ let file_menu = {'name': "File",
 \}
 
 let git_menu = {'name': "Git",
-     \'c': [":Telescope git_commits",   "commits"],
-     \'b': [":Telescope git_branches", "branches"],
+     \'gg': [":GitGutterToggle",          "GitGutter"],
+     \'sc': [":Telescope git_commits", "list commits"],
+     \'b': [":Telescope git_branches",     "branches"],
+     \'s': [":GitGutterStageHunk",       "stage hunk"],
+     \'c': [":Git commit",                   "commit"],
+     \'p': [":Git push",                       "push"],
 \}
 
 let run_menu = {'name': "Run",
@@ -231,3 +235,4 @@ endif
 set undodir=/Users/fernando/.config/vim-undo-dir
 set undofile
 
+GitGutter
