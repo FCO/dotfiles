@@ -199,6 +199,7 @@ let file_menu = {'name': "File",
      \'f':  [":Telescope find_files", "find files"],
      \'b':  [":Telescope bufers",     "buffers"],
      \'h':  [":Telescope help_tags",  "help"],
+     \'nt': [":NERDTreeToggleVCS",    "nerd tree"],
 \}
 
 let git_menu = {'name': "Git",
