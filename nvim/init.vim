@@ -47,13 +47,15 @@ Plug 'scrooloose/syntastic'
 
 Plug 'morhetz/gruvbox'
 
-Plug 'codota/tabnine-vim'
+" Plug 'codota/tabnine-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 Plug 'tpope/vim-fugitive'
 
 Plug 'airblade/vim-gitgutter'
+
+" Plug 'terryma/vim-multiple-cursors'
 
 call plug#end()
 
@@ -193,32 +195,35 @@ set relativenumber
 set nu
 
 let file_menu = {'name': "File",
-     \'d':  [":tabe $MYVIMRC",          "tabe vimrc"],
-     \'f':  [":Telescope find_files",   "find files"],
-     \'b':  [":Telescope bufers",          "buffers"],
-     \'h':  [":Telescope help_tags",          "help"],
+     \'d':  [":tabe $MYVIMRC",        "tabe vimrc"],
+     \'f':  [":Telescope find_files", "find files"],
+     \'b':  [":Telescope bufers",     "buffers"],
+     \'h':  [":Telescope help_tags",  "help"],
 \}
 
 let git_menu = {'name': "Git",
-     \'gg': [":GitGutterToggle",          "GitGutter"],
-     \'sc': [":Telescope git_commits", "list commits"],
-     \'b': [":Telescope git_branches",     "branches"],
-     \'s': [":GitGutterStageHunk",       "stage hunk"],
-     \'c': [":Git commit",                   "commit"],
-     \'p': [":Git push",                       "push"],
-     \'st': [":Git",                         "status"],
+     \'gg': [":GitGutterToggle",                        "GitGutter"],
+     \'sc': [":Telescope git_commits",                  "list commits"],
+     \'b':  [":Telescope git_branches",                 "branches"],
+     \'s':  [":GitGutterStageHunk",                     "stage hunk"],
+     \'c':  [":Git commit",                             "commit"],
+     \'p':  [":Git push",                               "push"],
+     \'st': [":Git",                                    "status"],
+     \'qf': [":command! Gqf GitGutterQuickFix | copen", "quickfix changes"],
+     \']':  [":GitGutterNextHunk",                      "next hunk"],
+     \'[':  [":GitGutterPreviousHunk",                  "previous hunk"],
 \}
 
 let run_menu = {'name': "Run",
-     \'p': [":!perl %",        "Run perl"],
-     \'r': [":!raku %",        "Run raku"],
+     \'p':  [":!perl %", "Run perl"],
+     \'r':  [":!raku %", "Run raku"],
      \'js': [":!node %", "Run javascript"],
 \}
 
 let g:leaderMenu = {'name':  "Main Menu",
-     \'f':  [file_menu, "File Menu"],
-     \'g': [git_menu,    "Git Menu"],
-     \'r': [run_menu,    "Run Menu"],
+     \'f': [file_menu, "File Menu"],
+     \'g': [git_menu,  "Git Menu"],
+     \'r': [run_menu,  "Run Menu"],
  \}
 
 " Define leader key to space and call vim-leader-mapper
