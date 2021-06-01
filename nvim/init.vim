@@ -222,9 +222,11 @@ let run_menu = {'name': "Run",
 \}
 
 let g:leaderMenu = {'name':  "Main Menu",
-     \'f': [file_menu, "File Menu"],
-     \'g': [git_menu,  "Git Menu"],
-     \'r': [run_menu,  "Run Menu"],
+     \'f':   [file_menu,                                    "File Menu"],
+     \'g':   [git_menu,                                     "Git Menu"],
+     \'r':   [run_menu,                                     "Run Menu"],
+     \'s':   [":SyntasticToggleMode",                       "Toggle syntastic"],
+     \'njk': [":set filetype=jinja | :SyntasticToggleMode", "Set NJK filetype"],
  \}
 
 " Define leader key to space and call vim-leader-mapper
@@ -241,3 +243,5 @@ if !isdirectory("/Users/fernando/.config/vim-undo-dir")
 endif
 set undodir=/Users/fernando/.config/vim-undo-dir
 set undofile
+
+autocmd BufRead,BufNewFile $PP/src/** set syntax=jinja.html
