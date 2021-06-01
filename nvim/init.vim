@@ -47,7 +47,7 @@ Plug 'scrooloose/syntastic'
 
 Plug 'morhetz/gruvbox'
 
-" Plug 'codota/tabnine-vim'
+Plug 'codota/tabnine-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -57,7 +57,16 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'terryma/vim-multiple-cursors'
 
+Plug 'preservim/tagbar'
+
+Plug 'ap/vim-css-color'
+
 call plug#end()
+
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+let g:airline#extensions#tagbar#flags = 's'
+let g:airline#extensions#tagbar#flags = 'p'
 
 lua require('telescope').load_extension('media_files')
 lua require('telescope').load_extension('fzy_native')
