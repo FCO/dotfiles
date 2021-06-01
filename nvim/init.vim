@@ -241,5 +241,3 @@ if !isdirectory("/Users/fernando/.config/vim-undo-dir")
 endif
 set undodir=/Users/fernando/.config/vim-undo-dir
 set undofile
-
-GitGutter
