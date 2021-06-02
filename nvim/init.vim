@@ -253,4 +253,6 @@ endif
 set undodir=/Users/fernando/.config/vim-undo-dir
 set undofile
 
-autocmd BufRead,BufNewFile $PP/src/** set syntax=jinja.html
+autocmd BufRead,BufNewFile /Volumes/Code/humanstate/payprop/payprop_www/src/* set syntax=jinja.html | SyntasticToggleMode
+
+set mouse=a
