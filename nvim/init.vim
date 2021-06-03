@@ -263,3 +263,12 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_enable_special = 0
 
 autocmd FileType gitcommit setlocal spell
+
+set list listchars=tab:│\ ,nbsp:␣,trail:☒,extends:▶,precedes:◀,eol:§,space:ᐧ
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
