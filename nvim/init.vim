@@ -47,7 +47,7 @@ Plug 'scrooloose/syntastic'
 
 Plug 'morhetz/gruvbox'
 
-" Plug 'codota/tabnine-vim'
+Plug 'codota/tabnine-vim'
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
@@ -62,8 +62,16 @@ Plug 'vim-test/vim-test'
 Plug 'vimwiki/vimwiki'
 
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'preservim/tagbar'
+
+Plug 'ap/vim-css-color'
 
 call plug#end()
+
+let g:airline#extensions#tagbar#enabled = 1
+let g:airline#extensions#tagbar#flags = 'f'
+let g:airline#extensions#tagbar#flags = 's'
+let g:airline#extensions#tagbar#flags = 'p'
 
 lua require('telescope').load_extension('media_files')
 lua require('telescope').load_extension('fzy_native')
@@ -228,9 +236,11 @@ let run_menu = {'name': "Run",
 \}
 
 let g:leaderMenu = {'name':  "Main Menu",
-     \'f': [file_menu, "File Menu"],
-     \'g': [git_menu,  "Git Menu"],
-     \'r': [run_menu,  "Run Menu"],
+     \'f':   [file_menu,                                    "File Menu"],
+     \'g':   [git_menu,                                     "Git Menu"],
+     \'r':   [run_menu,                                     "Run Menu"],
+     \'s':   [":SyntasticToggleMode",                       "Toggle syntastic"],
+     \'njk': [":set filetype=jinja | :SyntasticToggleMode", "Set NJK filetype"],
  \}
 
 " Define leader key to space and call vim-leader-mapper
@@ -247,3 +257,23 @@ if !isdirectory("/Users/fernando/.config/vim-undo-dir")
 endif
 set undodir=/Users/fernando/.config/vim-undo-dir
 set undofile
+
+autocmd BufRead,BufNewFile /Volumes/Code/humanstate/payprop/payprop_www/src/* set syntax=jinja.html | SyntasticToggleMode
+
+set mouse=a
+
+let g:startify_session_autoload = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_enable_special = 0
+
+autocmd FileType gitcommit setlocal spell
+
+set list listchars=tab:│\ ,nbsp:␣,trail:☒,extends:▶,precedes:◀,eol:§,space:ᐧ
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
