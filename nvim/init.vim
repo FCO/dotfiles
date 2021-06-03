@@ -256,3 +256,8 @@ set undofile
 autocmd BufRead,BufNewFile /Volumes/Code/humanstate/payprop/payprop_www/src/* set syntax=jinja.html | SyntasticToggleMode
 
 set mouse=a
+
+let g:startify_session_autoload = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_enable_special = 0
