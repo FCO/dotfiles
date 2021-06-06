@@ -72,11 +72,31 @@ let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
 let g:airline#extensions#tagbar#flags = 's'
 let g:airline#extensions#tagbar#flags = 'p'
+let g:airline#extensions#hunks#non_zero_only = 1
 
 lua require('telescope').load_extension('media_files')
 lua require('telescope').load_extension('fzy_native')
 
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
+" lua <<EOF
+" require'nvim-treesitter.configs'.setup {
+"     -- highlight = { enable = true },
+"     incremental_selection = {
+"         enable = true,
+"         keymaps = {
+"             init_selection = "gnn",
+"             node_incremental = "grn",
+"             scope_incremental = "grc",
+"             node_decremental = "grm",
+"         },
+"         indent = {
+"             enable = true
+"         }
+"     },
+" }
+" EOF
+"
+" set foldmethod=expr
+" set foldexpr=nvim_treesitter#foldexpr()
 
 " Configure the completion chains
 let g:completion_chain_complete_list = {
