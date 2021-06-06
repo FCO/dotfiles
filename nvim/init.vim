@@ -247,11 +247,12 @@ let git_menu = {'name': "Git",
      \'qf': [":command! Gqf GitGutterQuickFix | copen", "quickfix changes"],
      \']':  [":GitGutterNextHunk",                      "next hunk"],
      \'[':  [":GitGutterPrevHunk",                      "previous hunk"],
+     \'f':  [":GitGutterFold",                          "fold"],
 \}
 
 let run_menu = {'name': "Run",
      \'p':  [":!perl %", "Run perl"],
-     \'r':  [":!raku %", "Run raku"],
+     \'r':  [":!raku -I. %", "Run raku"],
      \'js': [":!node %", "Run javascript"],
 \}
 
@@ -299,3 +300,5 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 set inccommand=split
 au TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false}
+
+let g:gitgutter_enabled = 1
