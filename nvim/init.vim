@@ -115,17 +115,17 @@ parser_config.perl = {
 }
 EOF
 
-lua <<EOF
-require'telescope'.setup {
-  extensions = {
-    media_files = {
-      -- filetypes whitelist
-      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = {"png", "webp", "jpg", "jpeg"},
-    }
-  },
-}
-EOF
+" lua <<EOF
+" require'telescope'.setup {
+"   extensions = {
+"     media_files = {
+"       -- filetypes whitelist
+"       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
+"       filetypes = {"png", "webp", "jpg", "jpeg"},
+"     }
+"   },
+" }
+" EOF
 
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
@@ -269,7 +269,7 @@ let g:startify_enable_special = 0
 
 autocmd FileType gitcommit setlocal spell
 
-set list listchars=tab:│\ ,nbsp:␣,trail:☒,extends:▶,precedes:◀,eol:⏎,space:ᐧ
+set list listchars=tab:│\ ,nbsp:␣,trail:䷀,extends:▶,precedes:◀,eol:␤,space:ᐧ
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
