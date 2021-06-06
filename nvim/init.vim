@@ -68,6 +68,13 @@ Plug 'ap/vim-css-color'
 
 call plug#end()
 
+let test#perl#prove#options = '-lr'
+"let test#raku#prove#options = '-e "raku -I." -lr'
+let test#custom_runners = {'raku': ['mi6']}
+"let test#raku#runner = 'mi6 test'
+
+"let test#enabled_runners = [ "raku#mi6" ]
+
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
 let g:airline#extensions#tagbar#flags = 's'
@@ -251,9 +258,11 @@ let git_menu = {'name': "Git",
 \}
 
 let run_menu = {'name': "Run",
-     \'p':  [":!perl %", "Run perl"],
+     \'p':  [":!perl %",     "Run perl"],
      \'r':  [":!raku -I. %", "Run raku"],
-     \'js': [":!node %", "Run javascript"],
+     \'js': [":!node %",     "Run javascript"],
+     \'t':  [":TestFile -v", "Run test file"],
+     \'T':  [":TestSuite",   "Run test suite"],
 \}
 
 let g:leaderMenu = {'name':  "Main Menu",
@@ -302,3 +311,5 @@ set inccommand=split
 au TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false}
 
 let g:gitgutter_enabled = 1
+
+nnoremap <leader>ss :s/\((\\|,\)\zs\s*\\|\ze)/\r/g<CR>=%
