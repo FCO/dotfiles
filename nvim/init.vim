@@ -311,6 +311,11 @@ let run_menu = {'name': "Run",
      \'T':  [":TestSuite",   "Run test suite"],
 \}
 
+"let refactor_menu = {'name': "Refactor",
+"    \'tk': ['diwh:let @a = system("tk <c-r>"")<cr>"ap',                                                                         'TK'],
+"    \'cb': ['0f<w"bdeF<"_cf>{% call ConditionalBlock( cgiCondition = "<c-r>b" ) %}<esc>/\/<c-r>b<CR>F<"_cf>{% endcall %}<esc>', 'Conditional block'],
+"\}
+
 let g:leaderMenu = {'name':  "Main Menu",
      \'f':   [file_menu,                                    "File Menu"],
      \'g':   [git_menu,                                     "Git Menu"],
