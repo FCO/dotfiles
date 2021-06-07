@@ -44,6 +44,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'troydm/zoomwintab.vim'
 
 Plug 'scrooloose/syntastic'
+"Plug 'dense-analysis/ale'
 
 Plug 'morhetz/gruvbox'
 
@@ -66,6 +67,9 @@ Plug 'preservim/tagbar'
 
 Plug 'ap/vim-css-color'
 
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'tpope/vim-rhubarb'
+
 call plug#end()
 
 let test#perl#prove#options = '-lr'
@@ -74,6 +78,9 @@ let test#custom_runners = {'raku': ['mi6']}
 "let test#raku#runner = 'mi6 test'
 
 "let test#enabled_runners = [ "raku#mi6" ]
+"
+let g:fugitive_gitlab_domains = ['https://gitsvn.ggcloud.net', 'https://gitlab.ggcloud.net']
+let g:gitlab_api_keys = { 'gitlab.ggcloud.net': 'F1d48baXiYVszzYLpfLe' }
 
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tagbar#flags = 'f'
@@ -166,6 +173,17 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+"let g:ale_perl_perlcritic_showrules = 1
+"let g:ale_always_populate_loc_list = 1
+"let g:ale_auto_loc_list = 1
+"let g:ale_check_on_open = 1
+"let g:ale_check_on_wq = 0
+"
+"let g:ale_enable_perl_checker = 1
+"let g:ale_enable_raku_checker = 1
+"let g:ale_perl_checkers = ['perl', 'podchecker']
+"let g:ale_raku_checkers = ['raku']
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -173,8 +191,35 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_enable_raku_checker = 1
-let g:syntastic_perl_checkers = ['perl', 'podchecker']
+let g:syntastic_perl_checkers = ['perl', 'perlcritic', 'podchecker']
 let g:syntastic_raku_checkers = ['raku']
+
+let g:syntastic_perl_perl_args = '-c -Mwarnings -Ilib -It/lib -Ipay_prop/lib -Igglib -I../../tools/lib -I../../tools/testing/lib'
+"let g:syntastic_perl_perl_quiet_messages = { 'regex': "Can't locate |$ENV" }
+
+let g:perl_fold = 1
+let g:perl_include_pod = 1
+
+let g:perl_local_lib_path = 'lib'
+let g:perl_inc_path = system('perl -e "print join qq(,), @INC, qw(lib pay_prop/lib gglib)"')
+
+if !empty(g:perl_inc_path)
+    let g:perl_local_lib_path = g:perl_local_lib_path .',' . g:perl_inc_path
+endif
+
+"augroup perl_local_lib
+"    autocmd!
+"    autocmd! FileType perl PerlLocalLibPath
+"augroup end
+
+" Run perl on current file ---------------------------------------------- {{{2
+function! MyPerlrun()
+    let l:old_makeprg = &makeprg
+    let l:cmd = 'perl % $*'
+    let &makeprg = l:cmd
+    :make
+    let &makeprg = l:old_makeprg
+endfunction
 
 set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
 
@@ -241,6 +286,7 @@ let file_menu = {'name': "File",
      \'b':  [":Telescope bufers",     "buffers"],
      \'h':  [":Telescope help_tags",  "help"],
      \'nt': [":NERDTreeToggleVCS",    "nerd tree"],
+     \'zf': [":FZF",                  "FZF"],
 \}
 
 let git_menu = {'name': "Git",
@@ -307,9 +353,14 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
 set inccommand=split
 au TextYankPost * silent! lua vim.highlight.on_yank {on_visual=false}
 
 let g:gitgutter_enabled = 1
 
 nnoremap <leader>ss :s/\((\\|,\)\zs\s*\\|\ze)/\r/g<CR>=%
+
+nnoremap <leader>tk diwh:let @a = system("tk <c-r>"")<cr>"ap
+vnoremap <leader>tk dh:let @a = system("tk '<c-r>"'")<cr>"ap
+nnoremap <leader>cb 0f<w"bdeF<"_cf>{% call ConditionalBlock( cgiCondition = "<c-r>b" ) %}<esc>/\/<c-r>b<CR>F<"_cf>{% endcall %}<esc>
