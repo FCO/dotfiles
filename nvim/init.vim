@@ -70,7 +70,11 @@ Plug 'ap/vim-css-color'
 Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-rhubarb'
 
+Plug 'raku/vim-raku'
+
 call plug#end()
+
+set g:raku_unicode_abbrevs = 1
 
 let test#perl#prove#options = '-lr'
 "let test#raku#prove#options = '-e "raku -I." -lr'
