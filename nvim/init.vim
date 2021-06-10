@@ -74,7 +74,7 @@ Plug 'raku/vim-raku'
 
 call plug#end()
 
-set g:raku_unicode_abbrevs = 1
+let g:raku_unicode_abbrevs = 1
 
 let test#perl#prove#options = '-lr'
 "let test#raku#prove#options = '-e "raku -I." -lr'
