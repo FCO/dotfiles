@@ -305,6 +305,8 @@ let git_menu = {'name': "Git",
      \']':  [":GitGutterNextHunk",                      "next hunk"],
      \'[':  [":GitGutterPrevHunk",                      "previous hunk"],
      \'f':  [":GitGutterFold",                          "fold"],
+     \'v':  [":SGitSave",                               "save session"],
+     \'l':  [":SGitLoad",                               "load session"],
 \}
 
 let run_menu = {'name': "Run",
@@ -347,10 +349,11 @@ autocmd BufRead,BufNewFile /Volumes/Code/humanstate/payprop/payprop_www/src/* se
 
 set mouse=a
 
-let g:startify_session_autoload = 1
-let g:startify_change_to_vcs_root = 1
+let g:startify_session_autoload    = 1
+let g:startify_change_to_vcs_root  = 1
 let g:startify_fortune_use_unicode = 1
-let g:startify_enable_special = 0
+let g:startify_enable_special      = 0
+let g:startify_session_dir         = "~/.config/nvim-sessions"
 
 autocmd FileType gitcommit setlocal spell
 
@@ -373,3 +376,24 @@ nnoremap <leader>ss :s/\((\\|,\)\zs\s*\\|\ze)/\r/g<CR>=%
 nnoremap <leader>tk diwh:let @a = system("tk <c-r>"")<cr>"ap
 vnoremap <leader>tk dh:let @a = system("tk '<c-r>"'")<cr>"ap
 nnoremap <leader>cb 0f<w"bdeF<"_cf>{% call ConditionalBlock( cgiCondition = "<c-r>b" ) %}<esc>/\/<c-r>b<CR>F<"_cf>{% endcall %}<esc>
+
+" figure out if there's a session for the current branch and if so open that
+function! SGitLoad()
+    let git_repo   = GitOrigin()
+    let git_branch = GitBranch()
+    execute 'SLoad ' . git_repo . '___' . git_branch
+endfunction
+function! SGitSave()
+    let git_repo   = GitOrigin()
+    let git_branch = GitBranch()
+    execute 'SSave ' . git_repo . '___' . git_branch
+endfunction
+function! GitBranch()
+    return system( "git branch | grep '^*' | awk '{print $2}' | sed 's/\\//__/'" )
+endfunction
+function! GitOrigin()
+    return system( "git remote get-url origin | perl -F: -paE 'chomp($_ = $F[-1]); s/\\//__/g; s/\\.git$//'" )
+endfunction
+
+command SGitLoad :call SGitLoad()
+command SGitSave :call SGitSave()
