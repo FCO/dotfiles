@@ -310,6 +310,7 @@ let git_menu = {'name': "Git",
      \'f':  [":GitGutterFold",                          "fold"],
      \'v':  [":SGitSave",                               "save session"],
      \'l':  [":SGitLoad",                               "load session"],
+     \'m':  [":Git grep '<<<<<<<' | :copen",            "merge conflicts"],
 \}
 
 let run_menu = {'name': "Run",
@@ -400,3 +401,5 @@ endfunction
 
 command SGitLoad :call SGitLoad()
 command SGitSave :call SGitSave()
+
+set switchbuf+=usetab,newtab
