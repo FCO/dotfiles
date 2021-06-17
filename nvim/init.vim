@@ -72,9 +72,12 @@ Plug 'tpope/vim-rhubarb'
 
 Plug 'raku/vim-raku'
 
+Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 
 let g:raku_unicode_abbrevs = 1
+set encoding=UTF-8
 
 let test#perl#prove#options = '-lr'
 "let test#raku#prove#options = '-e "raku -I." -lr'
