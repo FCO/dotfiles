@@ -392,7 +392,7 @@ function! SGitSave()
     execute 'SSave ' . git_repo . '___' . git_branch
 endfunction
 function! GitBranch()
- save   return system( "git branch | grep '^*' | awk '{print $2}' | sed 's/\\//__/g'" )
+    return system( "git branch | grep '^*' | awk '{print $2}' | sed 's/\\//__/'" )
 endfunction
 function! GitOrigin()
     return system( "git remote get-url origin | perl -F: -paE 'chomp($_ = $F[-1]); s/\\//__/g; s/\\.git$//'" )
