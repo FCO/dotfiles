@@ -393,7 +393,7 @@ function! SGitSave()
     execute 'SSave ' . git_repo . '___' . git_branch
 endfunction
 function! GitBranch()
-    return system( "git branch | grep '^*' | awk '{print $2}' | sed 's/\\//__/'" )
+    return system( "git branch | grep '^*' | awk '{print $2}' | sed 's/\\//__/g'" )
 endfunction
 function! GitOrigin()
     return system( "git remote get-url origin | perl -F: -paE 'chomp($_ = $F[-1]); s/\\//__/g; s/\\.git$//'" )
@@ -402,4 +402,5 @@ endfunction
 command SGitLoad :call SGitLoad()
 command SGitSave :call SGitSave()
 
-nnoremap <leader>cpan yiW:tabe<cr>:terminal cpan <c-r>"<cr>
+nnoremap <leader>cpan "cyiW:tabe<cr>:terminal cpan <c-r>c<cr>
+nnoremap <leader>tag T:"tye:tag <c-r>t<cr>
