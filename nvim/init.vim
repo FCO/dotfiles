@@ -402,4 +402,4 @@ endfunction
 command SGitLoad :call SGitLoad()
 command SGitSave :call SGitSave()
 
-set switchbuf+=usetab,newtab
+nnoremap <leader>cpan yiW:tabe<cr>:terminal cpan <c-r>"<cr>
