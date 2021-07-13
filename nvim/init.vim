@@ -331,6 +331,7 @@ let g:leaderMenu = {'name':  "Main Menu",
      \'g':   [git_menu,                                     "Git Menu"],
      \'r':   [run_menu,                                     "Run Menu"],
      \'s':   [":SyntasticToggleMode",                       "Toggle syntastic"],
+     \'z':   [":ZoomWinTabToggle",                          "Toggle zoom"],
      \'njk': [":set filetype=jinja | :SyntasticToggleMode", "Set NJK filetype"],
  \}
 
