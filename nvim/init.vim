@@ -404,4 +404,5 @@ command SGitLoad :call SGitLoad()
 command SGitSave :call SGitSave()
 
 nnoremap <leader>cpan "cyiW:tabe<cr>:terminal cpan <c-r>c<cr>
+nnoremap <leader>zef  "cyiW:tabe<cr>:terminal zef install <c-r>c<cr>
 nnoremap <leader>tag T:"tye:tag <c-r>t<cr>
